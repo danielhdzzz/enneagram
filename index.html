@@ -7,6 +7,23 @@
 	<link rel="stylesheet" type="text/css" href="build/css/main.css">
 </head>
 <body>
+	<canvas id="myEnneagram" width="500" height="500"></canvas>
 	<script src="./build/js/main.js"></script>
+	<script type="text/javascript">
+		var ctx = document.getElementById('myEnneagram').getContext('2d');
+		enneagram(ctx, {
+			data: [0,14,24,12,50,80,89,29,100],
+			options: {
+				radius: 130,
+				maxColor: [255,10,10],
+				minColor: [230,230,230],
+				lineWidth: 2,
+				lineColor: 'black',
+				pointSize: 15,
+				pointFontSize: 17,
+				fontColor: 'black'
+			}
+		});
+	</script>
 </body>
 </html>
