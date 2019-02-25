@@ -1,49 +1,63 @@
-const enneagram = (ctx, settings) => {
- 	const radius = 130;
-  const maxColor = [255, 10, 10];
-  const minColor = [230,230,230];
-  const lineWidth = 2;
-  const lineColor = 'black';
-  const pointSize = 15;
-  const pointFontSize = 17;
-  const fontColor = 'black';
-	const center_x = 250;
-	const center_y = 250;
+const enneagram = (settings) => {
+	console.log(settings.targetId)
+	const canvas = document.getElementById(settings.targetId);
+	var ctx = canvas.getContext('2d');
+
+	canvas.style.width='100%';
+  canvas.width  = canvas.offsetWidth;
+  console.log(canvas.width)
+  canvas.style.height= `${canvas.width}px`;
+  canvas.height = canvas.offsetHeight;
+
+  let opt = {
+  	radius: canvas.width / 3,
+	  maxColor: [255, 10, 10],
+	  minColor: [230,230,230],
+	  lineWidth: 2,
+	  lineColor: 'black',
+	  pointSize: 15,
+	  pointFontSize: 17,
+	  fontColor: 'black'
+  }
+	const center_x = canvas.width / 2;
+	const center_y = canvas.height / 2;
 	const angleIncr = 360 / 9;
 
+	// override if options are set
 	for (var key in settings.options) {
     if (settings.options.hasOwnProperty(key)) {
-    	console.log(key + " -> " + settings.options[key]);
+    	opt[key] = settings.options[key]
     }
 	}
 
+	// draw
 	function drawCircle(){
-		ctx.lineWidth = lineWidth;
+		ctx.lineWidth = opt.lineWidth;
     ctx.beginPath();
-    ctx.arc(center_x, center_y, radius, 0, 2 * Math.PI);
+    ctx.arc(center_x, center_y, opt.radius, 0, 2 * Math.PI);
     ctx.stroke();
 	}
 
 	function drawPoint(angle,label,percentage){
-    var x = center_x + radius * Math.cos(-angle*Math.PI/180);
-    var y = center_y + radius * Math.sin(-angle*Math.PI/180);
+    var x = center_x + opt.radius * Math.cos(-angle*Math.PI/180);
+    var y = center_y + opt.radius * Math.sin(-angle*Math.PI/180);
 
     ctx.fillStyle = interpolateColor(percentage);
     ctx.beginPath();
-    ctx.arc(x, y, pointSize, 0, 2 * Math.PI);
+    ctx.arc(x, y, opt.pointSize, 0, 2 * Math.PI);
     ctx.fill();
-		ctx.fillStyle = fontColor;
-		ctx.font = `${pointFontSize}px Arial`;
-    ctx.fillText(label,x - pointFontSize / 4,y + pointFontSize / 3);
+		ctx.fillStyle = opt.fontColor;
+		ctx.font = `${opt.pointFontSize}px Arial`;
+    ctx.fillText(label,x - opt.pointFontSize / 4,y + opt.pointFontSize / 3);
 	}
 
 	function drawLine(angle1, angle2) {
-		var x1 = center_x + radius * Math.cos(-angle1*Math.PI/180);
-    var y1 = center_y + radius * Math.sin(-angle1*Math.PI/180);
-    var x2 = center_x + radius * Math.cos(-angle2*Math.PI/180);
-    var y2 = center_y + radius * Math.sin(-angle2*Math.PI/180);
-    ctx.strokeStyle = lineColor;
-		ctx.lineWidth = lineWidth;
+		var x1 = center_x + opt.radius * Math.cos(-angle1*Math.PI/180);
+    var y1 = center_y + opt.radius * Math.sin(-angle1*Math.PI/180);
+    var x2 = center_x + opt.radius * Math.cos(-angle2*Math.PI/180);
+    var y2 = center_y + opt.radius * Math.sin(-angle2*Math.PI/180);
+    ctx.strokeStyle = opt.lineColor;
+		ctx.lineWidth = opt.lineWidth;
     ctx.beginPath();
 		ctx.moveTo(x1, y1);
 		ctx.lineTo(x2, y2);
@@ -54,8 +68,8 @@ const enneagram = (ctx, settings) => {
 		let rgbVals = []
 		for (var i = 0; i < 3; i++) {
 			var perc = percentage;
-			var top = maxColor[i];
-			var bottom = minColor[i];
+			var top = opt.maxColor[i];
+			var bottom = opt.minColor[i];
 			var distance = top - bottom;
 			var position = bottom + ((perc / 100) * distance);
 			rgbVals.push(position)
