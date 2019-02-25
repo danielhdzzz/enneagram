@@ -17,7 +17,7 @@ const enneagram = (settings) => {
 	const angleIncr = 360 / 9;
 
 	// override if options are set
-	for (var key in settings.options) {
+	for (let key in settings.options) {
     if (settings.options.hasOwnProperty(key)) {
     	opt[key] = settings.options[key]
     }
@@ -40,16 +40,16 @@ const enneagram = (settings) => {
 
 	// draw
 	const draw = () => {
-		function drawCircle(){
+		const drawCircle = () =>{
 			ctx.lineWidth = opt.lineWidth;
 	    ctx.beginPath();
 	    ctx.arc(center_x, center_y, opt.radius, 0, 2 * Math.PI);
 	    ctx.stroke();
 		}
 
-		function drawPoint(angle,label,percentage){
-	    var x = center_x + opt.radius * Math.cos(-angle*Math.PI/180);
-	    var y = center_y + opt.radius * Math.sin(-angle*Math.PI/180);
+		const drawPoint = (angle,label,percentage) => {
+	    const x = center_x + opt.radius * Math.cos(-angle*Math.PI/180);
+	    const y = center_y + opt.radius * Math.sin(-angle*Math.PI/180);
 
 	    ctx.fillStyle = interpolateColor(percentage);
 	    ctx.beginPath();
@@ -60,11 +60,11 @@ const enneagram = (settings) => {
 	    ctx.fillText(label,x - opt.pointFontSize / 4,y + opt.pointFontSize / 3);
 		}
 
-		function drawLine(angle1, angle2) {
-			var x1 = center_x + opt.radius * Math.cos(-angle1*Math.PI/180);
-	    var y1 = center_y + opt.radius * Math.sin(-angle1*Math.PI/180);
-	    var x2 = center_x + opt.radius * Math.cos(-angle2*Math.PI/180);
-	    var y2 = center_y + opt.radius * Math.sin(-angle2*Math.PI/180);
+		const drawLine = (angle1, angle2) => {
+			const x1 = center_x + opt.radius * Math.cos(-angle1*Math.PI/180);
+	    const y1 = center_y + opt.radius * Math.sin(-angle1*Math.PI/180);
+	    const x2 = center_x + opt.radius * Math.cos(-angle2*Math.PI/180);
+	    const y2 = center_y + opt.radius * Math.sin(-angle2*Math.PI/180);
 	    ctx.strokeStyle = opt.lineColor;
 			ctx.lineWidth = opt.lineWidth;
 	    ctx.beginPath();
@@ -73,17 +73,17 @@ const enneagram = (settings) => {
 			ctx.stroke();
 		}
 
-		function interpolateColor (percentage){
+		const interpolateColor = (percentage) => {
 			let rgbVals = []
-			for (var i = 0; i < 3; i++) {
-				var perc = percentage;
-				var top = opt.maxColor[i];
-				var bottom = opt.minColor[i];
-				var distance = top - bottom;
-				var position = bottom + ((perc / 100) * distance);
+			for (let i = 0; i < 3; i++) {
+				const perc = percentage;
+				const top = opt.maxColor[i];
+				const bottom = opt.minColor[i];
+				const distance = top - bottom;
+				const position = bottom + ((perc / 100) * distance);
 				rgbVals.push(position)
 			}
-			let result = `rgb(${rgbVals[0]},${rgbVals[1]},${rgbVals[2]})`;
+			const result = `rgb(${rgbVals[0]},${rgbVals[1]},${rgbVals[2]})`;
 			return result
 		}
 
@@ -98,12 +98,12 @@ const enneagram = (settings) => {
 		drawLine(90 - angleIncr * 5, 90 - angleIncr * 7)
 		drawLine(90 - angleIncr * 5, 90 - angleIncr * 8)
 		drawLine(90 - angleIncr * 6, 90 - angleIncr * 9)
-		for (var i = 0; i < 9; i++) {
+		for (let i = 0; i < 9; i++) {
 			drawPoint(0 - (i * (angleIncr)) + 50, i + 1, settings.data[i]);
 		}
 	}
 
-	window.onresize = function(event) {
+	window.onresize = (event) => {
 		resize();
 		draw();
 	};

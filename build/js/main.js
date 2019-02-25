@@ -42,14 +42,14 @@ var enneagram = function enneagram(settings) {
 
 	// draw
 	var draw = function draw() {
-		function drawCircle() {
+		var drawCircle = function drawCircle() {
 			ctx.lineWidth = opt.lineWidth;
 			ctx.beginPath();
 			ctx.arc(center_x, center_y, opt.radius, 0, 2 * Math.PI);
 			ctx.stroke();
-		}
+		};
 
-		function drawPoint(angle, label, percentage) {
+		var drawPoint = function drawPoint(angle, label, percentage) {
 			var x = center_x + opt.radius * Math.cos(-angle * Math.PI / 180);
 			var y = center_y + opt.radius * Math.sin(-angle * Math.PI / 180);
 
@@ -60,9 +60,9 @@ var enneagram = function enneagram(settings) {
 			ctx.fillStyle = opt.fontColor;
 			ctx.font = opt.pointFontSize + 'px Arial';
 			ctx.fillText(label, x - opt.pointFontSize / 4, y + opt.pointFontSize / 3);
-		}
+		};
 
-		function drawLine(angle1, angle2) {
+		var drawLine = function drawLine(angle1, angle2) {
 			var x1 = center_x + opt.radius * Math.cos(-angle1 * Math.PI / 180);
 			var y1 = center_y + opt.radius * Math.sin(-angle1 * Math.PI / 180);
 			var x2 = center_x + opt.radius * Math.cos(-angle2 * Math.PI / 180);
@@ -73,9 +73,9 @@ var enneagram = function enneagram(settings) {
 			ctx.moveTo(x1, y1);
 			ctx.lineTo(x2, y2);
 			ctx.stroke();
-		}
+		};
 
-		function interpolateColor(percentage) {
+		var interpolateColor = function interpolateColor(percentage) {
 			var rgbVals = [];
 			for (var i = 0; i < 3; i++) {
 				var perc = percentage;
@@ -87,7 +87,7 @@ var enneagram = function enneagram(settings) {
 			}
 			var result = 'rgb(' + rgbVals[0] + ',' + rgbVals[1] + ',' + rgbVals[2] + ')';
 			return result;
-		}
+		};
 
 		//Execution
 		drawCircle();
