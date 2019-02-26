@@ -1,7 +1,7 @@
 # enneagram
 
 Library to generate a responsive [Enneagram of Personality](https://en.wikipedia.org/wiki/Enneagram_of_Personality).
-Work in progress. Each of the 9 points, is asigned a value in order to display different configurations of personality.
+Work in progress. Each of the 9 points is asigned a value in order to display different configurations of personality.
 
 ![preview](https://raw.githubusercontent.com/danielhdzzz/enneagram/master/images/preview.png)
 
