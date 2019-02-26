@@ -1,4 +1,4 @@
-'use strict';
+"use strict";
 
 var enneagram = function enneagram(settings) {
     var canvas = document.getElementById(settings.targetId);
@@ -6,13 +6,13 @@ var enneagram = function enneagram(settings) {
     var canvasW = getCanvasW();
     var opt = {
         radius: canvas.width / 3,
-        maxColor: [255, 10, 10],
-        minColor: [230, 230, 230],
+        maxColor: [236, 76, 60],
+        minColor: [52, 73, 94],
         lineWidth: 2,
-        lineColor: 'black',
-        pointSize: 15,
-        pointFontSize: 17,
-        fontColor: 'black'
+        lineColor: "rgb(62, 83, 104)",
+        pointSize: 20,
+        pointFontSize: 19,
+        fontColor: "white"
     };
     var center_x = canvas.width / 2;
     var center_y = canvas.height / 2;
@@ -28,7 +28,7 @@ var enneagram = function enneagram(settings) {
     function getCanvasW() {
         canvas.style.width = '100%';
         canvas.width = canvas.offsetWidth;
-        canvas.style.height = canvas.width + 'px';
+        canvas.style.height = canvas.width + "px";
         canvas.height = canvas.offsetHeight;
         return canvas.width;
     }
@@ -43,6 +43,7 @@ var enneagram = function enneagram(settings) {
     // draw
     var draw = function draw() {
         var drawCircle = function drawCircle() {
+            ctx.strokeStyle = opt.lineColor;
             ctx.lineWidth = opt.lineWidth;
             ctx.beginPath();
             ctx.arc(center_x, center_y, opt.radius, 0, 2 * Math.PI);
@@ -58,7 +59,7 @@ var enneagram = function enneagram(settings) {
             ctx.arc(x, y, opt.pointSize, 0, 2 * Math.PI);
             ctx.fill();
             ctx.fillStyle = opt.fontColor;
-            ctx.font = opt.pointFontSize + 'px Arial';
+            ctx.font = opt.pointFontSize + "px Arial";
             ctx.fillText(label, x - opt.pointFontSize / 4, y + opt.pointFontSize / 3);
         };
 
@@ -85,7 +86,7 @@ var enneagram = function enneagram(settings) {
                 var position = bottom + perc / 100 * distance;
                 rgbVals.push(position);
             }
-            var result = 'rgb(' + rgbVals[0] + ',' + rgbVals[1] + ',' + rgbVals[2] + ')';
+            var result = "rgb(" + rgbVals[0] + "," + rgbVals[1] + "," + rgbVals[2] + ")";
             return result;
         };
 

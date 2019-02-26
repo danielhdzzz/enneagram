@@ -4,13 +4,13 @@ const enneagram = (settings) => {
     let canvasW = getCanvasW()
     let opt = {
         radius: canvas.width / 3,
-        maxColor: [255, 10, 10],
-        minColor: [230, 230, 230],
+        maxColor: [236, 76, 60],
+        minColor: [52, 73, 94],
         lineWidth: 2,
-        lineColor: 'black',
-        pointSize: 15,
-        pointFontSize: 17,
-        fontColor: 'black'
+        lineColor: "rgb(62, 83, 104)",
+        pointSize: 20,
+        pointFontSize: 19,
+        fontColor: "white"
     }
     let center_x = canvas.width / 2;
     let center_y = canvas.height / 2;
@@ -41,6 +41,7 @@ const enneagram = (settings) => {
     // draw
     const draw = () => {
         const drawCircle = () => {
+            ctx.strokeStyle = opt.lineColor;
             ctx.lineWidth = opt.lineWidth;
             ctx.beginPath();
             ctx.arc(center_x, center_y, opt.radius, 0, 2 * Math.PI);
